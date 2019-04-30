@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 public class TestValidMethods {
 
-    // unvalid
+    // invalid board
     private static int[][] board1 = {
             { 0, 0, 0, 2, 6, 0, 7, 0, 1 },
             { 6, 8, 0, 0, 7, 0, 0, 9, 0 },
@@ -46,7 +46,7 @@ public class TestValidMethods {
     @Test
     public void testSolve(){
         SudokuSolver ss = new SudokuSolver();
-        int[][] res = ss.solve(board2);
+        int[][] res = ss.solve(board2, false);
         assertTrue(ss.isValid(res));
     }
 }

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -6,7 +7,7 @@ public class SudokuSolver {
     Set<Integer> set = new HashSet<>(); // use this to check for duplicates
     Position pos;
 
-    public int[][] solve(int[][] board){
+    public int[][] solve(int[][] board, boolean print){
 
         int count = 0;
 
@@ -55,8 +56,21 @@ public class SudokuSolver {
                 forward = true;
                 pos.next();
             }
+
+            // test print
+            if(print) {
+                clearScreen();
+                printBoard(b);
+                System.out.println("Numbers tried: " + count);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        System.out.println("Solutions tried: " + count);
+
+        System.out.println("Numbers tried: " + count);
         return b;
     }
 
@@ -116,5 +130,15 @@ public class SudokuSolver {
             System.out.print("\n");
         }
         System.out.println("-----------------");
+    }
+
+    public void clearScreen(){
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
